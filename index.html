@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .pdf {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+        }
+        .pdf, html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        h1 {
+            color: green;
+        }
+        .collapsible {
+            background-color: #7cbaf0;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+        .active, .collapsible:hover {
+            background-color: #555;
+        }
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f1f1f1;
+        }
+    </style>
+    <title>Gestión de Horarios</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Gestión de Horarios</h1>
+
+    <!-- Grabador de Audio -->
+    <div id="controls">
+        <button id="recordButton">Grabar</button>
+        <button id="stopButton" disabled>Detener</button>
+    </div>
+    <h2>Audio Grabado</h2>
+    <ul id="recordingsList"></ul>
+
+    <!-- Formulario para Subir Archivo de Audio -->
+    <form id="audioForm">
+        <label for="audio">Sube tu archivo de audio:</label>
+        <input type="file" id="audio" name="audio" accept="audio/*">
+        <button type="submit">Transcribir</button>
+    </form>
+
+    <div id="transcriptionResult"></div>
+    <div id="scheduleForm">
+        <h2>Horario </h2>
+
+        <button class="collapsible">Presiona aqui</button>
+        <div class="content">
+            <img src="C:\Users\kinar\OneDrive\Desktop\hacakton\horario_generado.jpeg" alt="image1" width="800" height="1100">
+        </div>
+
+        <div id="standardizedResult"></div>
+        <button id="createScheduleButton">Crear Horario</button>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script src="recorder.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var coll = document.getElementsByClassName("collapsible");
+            for (var i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
